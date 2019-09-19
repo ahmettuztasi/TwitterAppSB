@@ -52,7 +52,7 @@ class UserViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         
         // Activity Indicator
         activityIndicatorStarter()
-        
+        userView.reloadData()
         //transition effect
         self.modalTransitionStyle = .crossDissolve
     }
@@ -140,7 +140,12 @@ extension UserViewController: ConnectionDelegate {
             DispatchQueue.main.async{
                 self.userView?.reloadData()
             }
-        } catch { print(error)}
+        } catch {
+            print(error)
+            DispatchQueue.main.async{
+                self.userView?.reloadData()
+            }
+        }
     }
     
     // Failure Connection to server

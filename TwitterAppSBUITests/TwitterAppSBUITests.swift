@@ -9,7 +9,9 @@
 import XCTest
 
 class TwitterAppSBUITests: XCTestCase {
-        
+    
+    var app: XCUIApplication!
+    
     override func setUp() {
         super.setUp()
         
@@ -18,19 +20,42 @@ class TwitterAppSBUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        app = XCUIApplication()
 
+        app.launchArguments.append("--uitesting")
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testGoingThroughOnboarding() {
+        app.launch()
+        
+        // Make sure we're displaying onboarding
+        //XCTAssertTrue(true)
+        app.swipeUp()
+        let profileImg = XCUIApplication().images["profileImg"].firstMatch
+        profileImg.tap()
+        
+        app.buttons["editUser"].tap()
+        
+        let firstNameTF = XCUIApplication().textFields["firstName"]
+        let lastNameTF = XCUIApplication().textFields["lastName"]
+        let userNameTF = XCUIApplication().textFields["userName"]
+        let ageTF = XCUIApplication().textFields["age"]
+        
+        firstNameTF.tap()
+        firstNameTF.typeText("Huseyin")
+        lastNameTF.tap()
+        lastNameTF.typeText("Bagana")
+        userNameTF.tap()
+        userNameTF.typeText("huseyinbagana")
+        ageTF.tap()
+        ageTF.typeText("36")
+        
+        app.buttons["save"].tap()
+        profileImg.tap()
+        app.swipeUp()
+        
+        // Onboarding should no longer be displayed
+        //XCTAssertFalse(true)
     }
-    
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
 }
