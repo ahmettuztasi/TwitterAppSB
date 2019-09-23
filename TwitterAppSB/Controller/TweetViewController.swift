@@ -10,12 +10,7 @@ import UIKit
 
 class TweetViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
-    @IBAction func backBtn(_ sender: Any) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        
-        let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "goToTweetVC") as! TweetViewController
-        self.present(tweetViewController, animated:true, completion:nil)
-    }
+   
     @IBOutlet weak var tweetView: UICollectionView!
     
     // Using for user id didselectitem, sending UserViewController
@@ -40,6 +35,10 @@ class TweetViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         tweetView?.dataSource = self
         
         activityIndicatorStarter()
+        
+        //transition effect
+        self.modalTransitionStyle = .crossDissolve
+        
         getTweets()
     }
     
@@ -47,7 +46,7 @@ class TweetViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     func getTweets() {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
-        service.connectService(baseUrl: "http://localhost:3000/tweets", method: .get, header: headers, body: nil, paremeters: nil)
+        service.connectService(baseUrl: "http://localhost:8081/tweets", method: .get, header: headers, body: nil, paremeters: nil)
     }
     
     // Activity Indicator starter
@@ -75,9 +74,17 @@ class TweetViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! UserViewController
         vc.userId = self.userId
+    }
+    
+    @IBAction func backBtn(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        
+        let tweetViewController = storyBoard.instantiateViewController(withIdentifier: "goToTweetVC") as! TweetViewController
+        self.present(tweetViewController, animated:true, completion:nil)
     }
 }
 

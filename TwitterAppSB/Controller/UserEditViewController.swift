@@ -10,15 +10,6 @@ import UIKit
 
 class UserEditViewController: UIViewController, UICollectionViewDelegateFlowLayout, ConnectionDelegate {
     
-    func successConnection(response: Data) {
-        print("okkey")
-    }
-    
-    func errorConnection(message: String) {
-        print("nooo")
-    }
-    
-    
     var userId: Int?
     
     var _firstName: String?
@@ -36,7 +27,8 @@ class UserEditViewController: UIViewController, UICollectionViewDelegateFlowLayo
     @IBOutlet weak var saveBtn: UIButton!
     
     
-    var parameters = [String: Any]()
+    var userParameters = [String : Any]()
+    var tweetParameters = [String : Any]()
     
     @IBAction func saveBtn(_ sender: Any) {
         _firstName = firstName.text
@@ -44,16 +36,24 @@ class UserEditViewController: UIViewController, UICollectionViewDelegateFlowLayo
         _userName = userName.text
         _age = Int(age.text!)
         
-        parameters = ["firstName": _firstName!,
-                      "lastName" : _lastName!,
-                      "profile": "@" + _userName!,
-                      "age": _age ]
+        userParameters = ["firstName": "_firstName",
+                      "lastName" : "_lastName",
+                      "profile": "@" + "_userName",
+                      "age": 5 ]
+        
+        tweetParameters = ["firstName": _firstName!,
+                          "lastName" : _lastName!,
+                          "profile": "@" + _userName!]
+        
         sendData()
         //butona bastıgında servise data yollayacak
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //transition effect
+        self.modalTransitionStyle = .crossDissolve
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -66,9 +66,21 @@ class UserEditViewController: UIViewController, UICollectionViewDelegateFlowLayo
     func sendData() {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
-        print("userId: \(userId!)")
-        service.connectService(baseUrl: "http://localhost:3000/users/\(userId!)", method: .patch, header: headers, body: nil, paremeters: parameters)
+        
+        service.connectService(baseUrl: "http://localhost:8081/updateuserintweets/\(userId!)/\(_firstName!)/\(_lastName!)", method: .get, header: headers, body: nil, paremeters: nil)
+        
+        service.connectService(baseUrl: "http://localhost:8081/updateuserinusers/\(userId!)/\(_firstName!)/\(_lastName!)/\(_userName!)/\(_age!)", method: .get, header: headers, body: nil, paremeters: nil)
+        
     }
+    
+    func successConnection(response: Data) {
+        Toast(text: "Bilgileriniz başarıyla güncellendi!", delay: 0, duration: 4).show()
+    }
+    
+    func errorConnection(message: String) {
+        Toast(text: "Bilgileriniz güncellenemedi!", delay: 0, duration: 4).show()
+    }
+    
     
 }
 

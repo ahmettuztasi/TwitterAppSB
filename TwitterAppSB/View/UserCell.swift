@@ -11,10 +11,22 @@ import UIKit
 
 class UserCell: UICollectionViewCell {
     
-    @IBAction func backBtn(_ sender: Any) {
-    }
+    
+    @IBOutlet weak var coverImg: UIImageView!
+    @IBOutlet weak var edituserBtn: UIButton!
+    @IBOutlet weak var optionsBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var bioTF: UITextView!
     @IBOutlet weak var fullNameLbl: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var userNameLbl: UILabel!
+    
+    public func configure() {
+        
+        bioTF.text = ""
+        fullNameLbl.text = ""
+        userNameLbl.text = ""
+        
+    }
+
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		576477832336C7A900DCB096 /* classDiagram.md in Resources */ = {isa = PBXBuildFile; fileRef = 576477812336C7A900DCB096 /* classDiagram.md */; };
+		576477842336C7A900DCB096 /* sequenceDiagram.md in Resources */ = {isa = PBXBuildFile; fileRef = 576477822336C7A900DCB096 /* sequenceDiagram.md */; };
 		579107332332A1A800A797AE /* UserEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579107322332A1A800A797AE /* UserEditViewController.swift */; };
 		57EED37123318B6900AB7B4D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EED37023318B6900AB7B4D /* Service.swift */; };
 		57EED37323318B8800AB7B4D /* ConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EED37223318B8800AB7B4D /* ConnectionDelegate.swift */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		18031FB7E25125ACBDBC08FA /* Pods_TwitterAppSB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterAppSB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		576477812336C7A900DCB096 /* classDiagram.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = classDiagram.md; sourceTree = "<group>"; };
+		576477822336C7A900DCB096 /* sequenceDiagram.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = sequenceDiagram.md; sourceTree = "<group>"; };
 		579107322332A1A800A797AE /* UserEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditViewController.swift; sourceTree = "<group>"; };
 		57EED37023318B6900AB7B4D /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		57EED37223318B8800AB7B4D /* ConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5764777C2336C6B300DCB096 /* Diagrams */ = {
+			isa = PBXGroup;
+			children = (
+				576477812336C7A900DCB096 /* classDiagram.md */,
+				576477822336C7A900DCB096 /* sequenceDiagram.md */,
+			);
+			path = Diagrams;
+			sourceTree = "<group>";
+		};
 		57EED36F23318B5C00AB7B4D /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +148,7 @@
 		57F6E68723315A4100B5EA10 = {
 			isa = PBXGroup;
 			children = (
+				5764777C2336C6B300DCB096 /* Diagrams */,
 				57F6E69223315A4100B5EA10 /* TwitterAppSB */,
 				57F6E6A923315A4100B5EA10 /* TwitterAppSBTests */,
 				57F6E6B423315A4100B5EA10 /* TwitterAppSBUITests */,
@@ -348,7 +362,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				57F6E6A023315A4100B5EA10 /* LaunchScreen.storyboard in Resources */,
+				576477832336C7A900DCB096 /* classDiagram.md in Resources */,
 				57F6E69D23315A4100B5EA10 /* Assets.xcassets in Resources */,
+				576477842336C7A900DCB096 /* sequenceDiagram.md in Resources */,
 				57F6E69B23315A4100B5EA10 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

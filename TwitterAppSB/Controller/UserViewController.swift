@@ -11,7 +11,6 @@ import UIKit
 class UserViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var userView: UICollectionView!
-    
     // Actity Indicator
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -19,6 +18,7 @@ class UserViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     var user : User? {
         didSet {
             activityIndicator.stopAnimating()
+            userView.reloadData()
         }
     }
     
@@ -52,7 +52,7 @@ class UserViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         
         // Activity Indicator
         activityIndicatorStarter()
-        userView.reloadData()
+ 
         //transition effect
         self.modalTransitionStyle = .crossDissolve
     }
@@ -61,7 +61,7 @@ class UserViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     func getUserById(userId: Int) {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
-        service.connectService(baseUrl: "http://localhost:3000/users/\(userId)", method: .get, header: headers, body: nil, paremeters: nil)
+        service.connectService(baseUrl: "http://localhost:8081/users/\(userId)", method: .get, header: headers, body: nil, paremeters: nil)
     }
     
     // Check user by userId
@@ -95,6 +95,9 @@ extension UserViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as! UserCell
+        
+        userCell.configure()
+        
         let fullName: String
         if user?.firstName != nil && user?.lastName != nil {
             fullName = "\(String(describing: user!.firstName)) \(String(describing: user!.lastName))"
